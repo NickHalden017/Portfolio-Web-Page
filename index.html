@@ -1,40 +1,370 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title> Portfolio — Samadbek Shuhratov</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio — Samadbek Shuhratov</title>
+    
+    <style>
+        
+        :root {
+            --primary-bg: #18181b; /* Body Background */
+            --secondary-bg: #27272a; /* Card Background */
+            --accent-color: #6366f1; /* Indigo Accent */
+            --text-light: #e5e5e5; /* Main Text */
+            --text-muted: #a1a1aa; /* Secondary Text */
+            --shadow-color: rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-light);
+            font-family: 'Inter', sans-serif; /* Assuming Inter is available */
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            padding: 1rem; /* Base padding for mobile */
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--secondary-bg); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        /* === Main Layout === */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* === Header and Navigation === */
+        header {
+            text-align: center;
+            padding-top: 2rem;
+            padding-bottom: 3rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid #3f3f46; /* Gray 700 equivalent */
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 800; /* extrabold */
+            letter-spacing: -0.025em; /* tracking-tight */
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: #818cf8; /* Indigo 400 equivalent */
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px; /* rounded-full */
+            border: 1px solid transparent;
+            transition: color 0.3s, border-color 0.3s;
+            margin: 0 0.5rem;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* === Section Styling === */
+        section {
+            margin-bottom: 3rem;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #3f3f46;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px var(--shadow-color), 0 8px 10px -6px var(--shadow-color);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #about:hover {
+            transform: scale(1.01);
+        }
+
+        #about p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        #about strong {
+            color: #ffffff;
+        }
+        
+        #about p:last-of-type {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.875rem;
+            margin-bottom: 0;
+        }
+
+        /* Highlighted skills inside About */
+        #about .text-yellow-400 { color: #facc15; }
+        #about .text-green-400 { color: #4ade80; }
+
+        /* === Projects Section === */
+        #projects h2 {
+            color: #ffffff; /* White title for contrast */
+            border-color: #3f3f46;
+        }
+
+        article {
+            background-color: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px var(--shadow-color);
+            border: 1px solid #3f3f46;
+            transition: border-color 0.3s;
+            margin-bottom: 1.5rem;
+        }
+
+        article:hover {
+            border-color: var(--accent-color);
+        }
+
+        article h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        article p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .project-links a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+
+        .project-links .view-project {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .project-links .view-project:hover {
+            color: #a5b4fc; /* Indigo 300 */
+        }
+
+        .project-links .source {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .project-links .source:hover {
+            color: #ffffff;
+        }
+        
+        .project-links svg {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.25rem;
+        }
+
+        /* === Skills Section === */
+        #skills {
+            background-color: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px var(--shadow-color);
+        }
+
+        #skills ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            gap: 1rem;
+            padding: 0;
+        }
+
+        #skills li {
+            background-color: rgba(99, 102, 241, 0.3); /* Indigo 700/30 */
+            color: #a5b4fc; /* Indigo 300 */
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            text-align: center;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        #skills li:hover {
+            background-color: rgba(99, 102, 241, 0.5); /* Indigo 700/50 */
+        }
+
+        /* === Footer === */
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #3f3f46;
+            color: #71717a; /* Gray 500 */
+            font-size: 0.875rem;
+        }
+
+        /* === Responsiveness (Mobile adjustments) === */
+        @media (max-width: 640px) {
+            header h1 {
+                font-size: 3rem;
+            }
+            header p {
+                font-size: 1.1rem;
+            }
+            #about, #skills {
+                padding: 1.5rem;
+            }
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            nav a {
+                margin: 0.25rem 0;
+            }
+            .project-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <h1>Samadbek Shuhratov</h1>
-    <p>Web developer • Designer • Problem solver • Consultant</p>
-    <nav>
-      <a href="#about">About</a> |
-      <a href="#projects">Projects</a> |
-      <a href="#skills">Skills</a> 
-    </nav>
-  </header>
-  <section id="about">
-    <h2>About me</h2>
-    <p>I am <strong>Samadbek Shuhratov</strong>, a dedicated web and bot developer with a strong focus on creating efficient, user-friendly, and scalable solutions.
-      My expertise includes HTML, CSS, JavaScript, and Python, which I use to build high-quality projects tailored to client needs.
-      I value precision, reliability, and continuous learning, always striving to deliver results that make a real impact</p>
-    <p>Location: Riga, Latvia</p>
-  </section>
-  <section id="projects">
-    <article>
-      <h3>Project One</h3>
-      <p>Short description of the project—what it does and the technologies used.</p>
-      <p><a href="#">View project</a> | <a href="#">Source (GitHub)</a></p>
-    </article>
-  </section>
-  <section id="skills">
-    <h2>Skills</h2>
-    <ul>
-      <li>HTML5</li>
-      <li>Python (basic)</li>
-    </ul>
-  </section>
+<body class="bg-primary-bg text-gray-100 font-sans min-h-screen antialiased">
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Header and Navigation -->
+        <header>
+            <h1>Samadbek Shuhratov</h1>
+            <p>Web developer • Designer • Problem solver • Consultant</p>
+            
+            <nav>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+            </nav>
+        </header>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2>About me</h2>
+            <p>
+                I am <strong class="text-white">Samadbek Shuhratov</strong>, a dedicated web and bot developer with a strong focus on creating efficient, user-friendly, and scalable solutions.
+                My expertise includes <strong class="text-yellow-400">HTML, CSS, JavaScript</strong>, and <strong class="text-green-400">Python</strong>, which I use to build high-quality projects tailored to client needs.
+                I value precision, reliability, and continuous learning, always striving to deliver results that make a real impact.
+            </p>
+            <p>Location: Riga, Latvia</p>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2>Projects</h2>
+            
+            <!-- Project Card Example -->
+
+
+            <article>
+                <h3>Project 1  "My first project"</h3>
+                <p>
+                  Certification Course: HTML and CSS Introduction — a webpage outlining a beginner course structure with video preview, course content table (Introduction: Basic concepts; Advanced Topics: Topic 1, Topic 2), tasks and quiz section including a weekly tasks table (Week 1: HTML Basics, Week 2: CSS Styling, Combined Week 3-4), and an unordered list of 15 items (Item 1 to Item 15). Features a sample video player and clean tabular layout. 
+                </p>
+                <div class="project-links">
+                    <a href="https://nickhalden017.github.io/Task_08_10_2025/" class="view-project">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        View project
+                    </a>
+                    
+                </div>
+            </article>
+
+
+            <article>
+                <h3>Project 2  "48-Hours-in-Riga-A-Mini-Guide"</h3>
+                <p>
+                    This project is a concise, informative travel web guide designed for visitors planning to spend two days in Riga, Latvia. Its purpose is to offer travelers a ready-made itinerary and practical tips for exploring Riga’s top sights, food, and activities within a 48-hour period. Key Features: detailed itinerary, photo gallery, practical advice on transportation and currency.
+                </p>
+                <div class="project-links">
+                    <a href="https://nickhalden017.github.io/48-Hours-in-Riga-A-Mini-Guide-Task-15_10/" class="view-project">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        View project
+                    </a>
+                    
+                </div>
+            </article>
+            <article>
+                <h3>Project 3  "Get user info"</h3>
+                <p>
+                  Information Form — a simple web form for collecting user data: full name, email, address, phone (+371 123 456 78), car make (BMW), driving license number, and language selection (English, Russian, Uzbek, Latish — error, should be Latvian). Features a green "Submit" and red "Reset" button. Frontend-only, no data submission, contains typos and limited functionality.                </p>
+                <div class="project-links">
+                    <a href="https://nickhalden017.github.io/Get_User_Info_TASK_21_10/" class="view-project">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        View project
+                    </a>
+                    
+                </div>
+            </article>
+            
+            
+            
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2>Skills</h2>
+            <ul>
+                <li>HTML5</li>
+                <li>CSS</li>
+                <li>Python</li>
+                <li>C++</li>
+                <li>Javascript</li>
+                <li>Git / GitHub</li>
+            </ul>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Samadbek Shuhratov.</p>
+        </footer>
+
+    </div>
 </body>
 </html>
